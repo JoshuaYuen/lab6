@@ -27,8 +27,23 @@ function addProjectDetails(e) {
 	var idNumber = projectID.substr('project'.length);
 
 	console.log("User clicked on project " + idNumber);
+
+
+	//change url
+	$.get("/project/" + idNumber, showProject)
+	console.log("URL: /project/" + idNumber)
 }
 
+function showProject(result) {
+	console.log(result);
+	var projectHTML = '<a href="#" class="thumbnail">' +
+		'<img src="' + result['image'] + '" class = "img">' +
+		'<p>' + result['title'] + '</p>' +
+		'<p><small>' + result['date'] + '</small></p></a>';
+
+	$(".details").html(projectHTML);
+	$(".details").html(result['summary']);
+}
 /*
  * Make an AJAX call to retrieve a color palette for the site
  * and apply it
